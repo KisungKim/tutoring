@@ -50,6 +50,7 @@ ubuntu1@ubuntu1-VirtualBox:~$
 1. sudo apt-get update : 패키징툴인 apt-get을 관리자권한으로 update한다는 의미입니다.
 2. sudo apt-get install default-jdk : java develop kit를 본인 우분투에 설치한다는 의미입니다.
 설치가 완료되었다면 다음을 확인할 수 있습니다.
+
 ```
 ubuntu1@ubuntu1-VirtualBox:~$ java -version
 openjdk version "1.8.0_181"
@@ -66,6 +67,7 @@ ubuntu1@ubuntu1-VirtualBox:~$
 이클립스를 사용하지 않는다면 본인이 프로젝트로 만들 폴더를 만들고 그 안에 자바 파일을 만들어주면 됩니다. 
 <br/>
 예를 들어서..
+
 ```java
 package test0922;
 

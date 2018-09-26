@@ -21,7 +21,9 @@ title: "SSH통신으로 첫 자바 프로젝트 생성하기"
 이제 맥 환경(윈도우의 경우 다른 툴을 사용할 수 있습니다)에서 터미널을 열어준 후 <code>ssh [우분투이름]@[inet address]</code>를 통해 우분투에 접속해줍니다.
 <br/>
 예를 들어, ubuntu1@192.168.0.0 이런식으로 적어주시면 됩니다. 아래처럼 되면 연결이 성공된 것입니다.
+
 ```
+
 Last login: Wed Sep 26 16:22:08 on ttys001
 gimgiseong-ui-MacBook-Pro:tutoring kisung$ ssh ubuntu1@[inet address] 
 ubuntu1@[inet address]'s password: 
@@ -52,11 +54,13 @@ ubuntu1@ubuntu1-VirtualBox:~$
 설치가 완료되었다면 다음을 확인할 수 있습니다.
 
 ```
+
 ubuntu1@ubuntu1-VirtualBox:~$ java -version
 openjdk version "1.8.0_181"
 OpenJDK Runtime Environment (build 1.8.0_181-8u181-b13-0ubuntu0.16.04.1-b13)
 OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
 ubuntu1@ubuntu1-VirtualBox:~$ 
+
 ```
 
 ## 자바 프로젝트 생성
@@ -69,6 +73,7 @@ ubuntu1@ubuntu1-VirtualBox:~$
 예를 들어서..
 
 ```java
+
 package test0922;
 
 public class MainClass {
@@ -78,4 +83,5 @@ public class MainClass {
 
   }
 }
+
 ```

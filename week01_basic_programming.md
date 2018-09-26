@@ -1,88 +1,79 @@
 ---
 layout: default
-title: "리액트와 다음지도(ReactApp&Daum API)"
+title: "SSH통신으로 첫 자바 프로젝트 생성하기"
 ---
 
-> 리액트를 활용해 다음 지도 api 활용하기 
+> SSH통신으로 우분투 환경에서 첫 자바 프로젝트 생성하기
 
-## Overview
+## SSH통신
 
 <br/>
-아래의 기능을 리액트를 활용해 구현하였습니다
+제 경우는 MacOS를 활용했으며 리눅스 4.14.27(kernel), ubuntu 16.04를 사용했습니다
 <br/>
-다음 지도 api의 sample에는 html, js 코드밖에 없기에 리액트 코드로 구현한 기능을 공유합니다
+가상머신은 Oracle VM virtualbox를 사용했습니다.
 <br/>
-다음지도를 활용하여 웹어플리케이션의 구현하실 때 참고하시면 됩니다
-
-1. 검색창을 활용해 지도 실행 및 이동시키기
-2. 현재 지도의 중심좌표를 기준으로 행정동 주소와 위도 경도를 받아오기
-3. 드래그 이벤트 발생 시, 활용방법 예시
-4. 지도의 크기를 조정하는 방법 예시
-5. 현재 지도를 static이미지로 받아오기
-
-<div style="color:blue;font-size:30px">
+먼저 virtualbox의 네트워크 환경설정은 (어댑터1)NAT, (어댑터2)bridge으로 설정했습니다.
 <br/>
-더 자세한 내용은 다음docs에 자세히 기술되어 있습니다
-<a href="http://apis.map.daum.net/"> 다음 지도 api 활용하기</a>
+이후 우분투에서 ctrl + alt + t를 통해 터미널을 열어주고 <code>sudo apt-get install ssh</code>의 명령어를 통해 ssh통신을 위한 모듈을 설치해줍니다.
 <br/>
-아래 깃허브 주소에서 실제로 구현한 코드를 참고하세요
-<a href="https://github.com/KisungKim/ReactWithDaumMap"> 구현한 코드 보기</a>
-</div>
-
-## 들어가며
-
-> 주요 랜더링 과정의 간략한 소개입니다
-
-항목1:  App.js -> DaumMapComponent_createMap실행(생략) 
+이제 <code>ifconfig</code>명령어를 통해 현재 연결된 네트워크의 inet address를 확인합니다. ex 192.xxx.xxx.xxx
 <br/>
-항목2: SearchBar을 통한 폼 입력 후 제출(*지도가 처음 그려집니다)
+이제 맥 환경(윈도우의 경우 다른 툴을 사용할 수 있습니다)에서 터미널을 열어준 후 <code>ssh [우분투이름]@[inet address]</code>를 통해 우분투에 접속해줍니다.
 <br/>
-항목3: map객체가 _createMap에서 생성됨에 따라 _coord2Address 등 기타 컴포넌트들의 동작이 유효해집니다(코드 내 조건문 참고)
+예를 들어, ubuntu1@192.168.0.0 이런식으로 적어주시면 됩니다. 아래처럼 되면 연결이 성공된 것입니다.
+```
+Last login: Wed Sep 26 16:22:08 on ttys001
+gimgiseong-ui-MacBook-Pro:tutoring kisung$ ssh ubuntu1@[inet address] 
+ubuntu1@[inet address]'s password: 
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.14.27 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+패키지 169개를  업데이트할 수 있습니다.
+0 업데이트는 보안 업데이트입니다.
+
+새 배포판 '18.04.1 LTS'을(를) 사용할 수 있습니다.
+업그레이드를 하시려면 'do-release-upgrade' 명령을 실행하세요.
+
+*** 시스템을 다시 시작해야 합니다 ***
+Last login: Mon Sep 24 12:10:44 2018 from [inet address]
+ubuntu1@ubuntu1-VirtualBox:~$ 
+
+```
+
+## jdk설치
+
+> sudo, apt-get, default-jdk 만 기억하시면 됩니다.
+
+1. sudo apt-get update : 패키징툴인 apt-get을 관리자권한으로 update한다는 의미입니다.
+2. sudo apt-get install default-jdk : java develop kit를 본인 우분투에 설치한다는 의미입니다.
+설치가 완료되었다면 다음을 확인할 수 있습니다.
+```
+ubuntu1@ubuntu1-VirtualBox:~$ java -version
+openjdk version "1.8.0_181"
+OpenJDK Runtime Environment (build 1.8.0_181-8u181-b13-0ubuntu0.16.04.1-b13)
+OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
+ubuntu1@ubuntu1-VirtualBox:~$ 
+```
+
+## 자바 프로젝트 생성
+
+> .java파일(들) -> 명령어를 통해 패키지로 묶어주기 -> 묶어준 패키지의 실행 클래스 파일을 실행
+보통 이클립스에서 자바프로젝트를 생성해주면 자동으로 소스폴더 밑에 package가 생성됩니다.
 <br/>
-항목4: 생성된 지도에서 drag이벤트 발생(render-trigger : 부모인 _createMap을 통해 받은 handleRemap()실행)
+이클립스를 사용하지 않는다면 본인이 프로젝트로 만들 폴더를 만들고 그 안에 자바 파일을 만들어주면 됩니다. 
 <br/>
-항목5: _createMap을 제외한 나머지 컴포넌트들은 _createMap의 state변화에 따라 영향을 받습니다.
+예를 들어서..
+```java
+package test0922;
 
-## 검색창을 활용해 지도 실행 및 이동시키기
+public class MainClass {
+  public static void main(String args[]) { 
+    System.out.println("Hello JAVA!!");
+    new TestClass().showMessage();
 
-> DaumMapComponent_createMap.js와 SearchBar.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/basicMap/">이동하기</a>
-<br/>
-구현 코드 : 
-<br/>
-<a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_createMap.js">createMap으로 이동하기</a>
-<br/>
-<a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/SearchBar.js">SearchBar으로 이동하기</a>
-
-## 현재 지도의 중심좌표를 기준으로 행정동 주소와 위도 경도를 받아오기
-
-> DaumMapComponent_createMap.js와  DaumMapComponent_coord2Address.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/mapInfo/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_coord2Address.js">이동하기</a>
-
-## 드래그 이벤트 발생 시, 활용방법 예시
-
-> DaumMapComponent_createMap.js와  DaumMapComponent_mapDragend.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/addMapDragendEvent/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_mapDragEnd.js">이동하기</a>
-
-## 지도의 크기를 조정하는 방법 예시
-
-> DaumMapComponent_createMap.js와  DaumMapComponent_resize.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/mapRelayout/">이동하기</a>
-<br/>음
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_resize.js">이동하기</a>
-
-## 현재 지도를 static이미지로 받아오기
-
-> DaumMapComponent_createMap.js와  DaumMapComponent_staticMap.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/staticMapWithMarker/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_staticMap.js">이동하기</a>
+  }
+}
+```

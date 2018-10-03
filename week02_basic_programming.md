@@ -1,88 +1,167 @@
 ---
 layout: default
-title: "리액트와 다음지도(ReactApp&Daum API)"
+title: "자바 클래스에 대해 이해하기"
 ---
 
-> 리액트를 활용해 다음 지도 api 활용하기 
+> method영역, heap영역, stack영역
 
-## Overview
+다음의 글을 참고하셔도 도움이 됩니다
+<br/>
+<a href="http://programmer-seva.tistory.com/72">참조 타입과 메모리</a>
+<br/>
+정말 간단하게 말하면 public static void main(String args[]) { } 라는 놈이 자바 프로그램의 시작(정확히 말하면 아닙니다)이라고 생각하시면 됩니다.
+<br/>
+그리고 위 메소드는 stack영역에서 실행됩니다.
+<br/>
+일단 stack영역에서 실행이 되고 만약 main함수에서 <code>Car myobj = new Car();</code>와 같이 객체를 생성했다면,
+<br/>
+method영역에서 Car클래스의 정보를 가져와서 heap영역에 myobj를 마련한다고 생각하시면 됩니다.
+<br/>
+그냥 여기서는 
+
+1. 프로그램이 돌아가는 순서, == stack영역 ex> public static void main(String args[])
+2. 프로그램이 돌아가면서 사용하는 클래스의 정보, == method영역 ex> class 'Car'
+3. 프로그램이 돌면서 생성한 객체들의 정보가 == heap영역 ex> instance 'myobj'
+
+각각 구분되어 저장된다고만 이해하시면 됩니다.
+
+> 자바 클래스의 생성자 이해하기
+
+## 생성자란?
 
 <br/>
-아래의 기능을 리액트를 활용해 구현하였습니다
+자바 클래스는 기능적인면에서 패키지, import모듈, 필드, 생성자, 메소드로 이루어져 있습니다.
 <br/>
-다음 지도 api의 sample에는 html, js 코드밖에 없기에 리액트 코드로 구현한 기능을 공유합니다
+import모듈의 경우 일단 지금은 설명을 생략하겠습니다. 
 <br/>
-다음지도를 활용하여 웹어플리케이션의 구현하실 때 참고하시면 됩니다
-
-1. 검색창을 활용해 지도 실행 및 이동시키기
-2. 현재 지도의 중심좌표를 기준으로 행정동 주소와 위도 경도를 받아오기
-3. 드래그 이벤트 발생 시, 활용방법 예시
-4. 지도의 크기를 조정하는 방법 예시
-5. 현재 지도를 static이미지로 받아오기
-
-<div style="color:blue;font-size:30px">
+패키지의 경우 이전 튜터링 파일을 참고하시면 됩니다.
 <br/>
-더 자세한 내용은 다음docs에 자세히 기술되어 있습니다
-<a href="http://apis.map.daum.net/"> 다음 지도 api 활용하기</a>
+생성자의 경우 자동차 공장에서의 생산라인이라고 생각하시면 됩니다.
 <br/>
-아래 깃허브 주소에서 실제로 구현한 코드를 참고하세요
-<a href="https://github.com/KisungKim/ReactWithDaumMap"> 구현한 코드 보기</a>
-</div>
+코드상에서 클래스 이름과 같은 메소드를 가집니다.
 
-## 들어가며
+```java
+class Car {
+  // ...(중략)...
+  public Car() {};                // <- 이런 놈들이
+  public Car(int something) {};   // <- 생성자입니다.
+  // ...(중략)...
+}
+```
 
-> 주요 랜더링 과정의 간략한 소개입니다
-
-항목1:  App.js -> DaumMapComponent_createMap실행(생략) 
 <br/>
-항목2: SearchBar을 통한 폼 입력 후 제출(*지도가 처음 그려집니다)
+자동차 공장, 즉 Car이라는 이름을 가진 class가 있을 때 
 <br/>
-항목3: map객체가 _createMap에서 생성됨에 따라 _coord2Address 등 기타 컴포넌트들의 동작이 유효해집니다(코드 내 조건문 참고)
+그 공장 안에는 여러 생산라인이 있습니다.
 <br/>
-항목4: 생성된 지도에서 drag이벤트 발생(render-trigger : 부모인 _createMap을 통해 받은 handleRemap()실행)
+예를 들어 기본적으로 빨간색 자동차만 생산하는 생산라인, 혹은 기본적으로 DIY자동차를 생산하는 생산라인, 혹은 기본적으로 아반x만 생산하는 생산라인, 혹은 그냥 박스형 자동차만 생산하는 생산라인이 있을 수 있습니다.
 <br/>
-항목5: _createMap을 제외한 나머지 컴포넌트들은 _createMap의 state변화에 따라 영향을 받습니다.
+이를 생성자의 개념에 대입해보면..
 
-## 검색창을 활용해 지도 실행 및 이동시키기
+1. 기본적으로 빨간색 자동차만 생산하는 생성자
+2. 기본적으로 DIY 자동차만 생산하는 생성자
+3. 기본적으로 아반x 자동차만 생산하는 생성자
+4. 아무것도 정해지지 않은, 기본형 자동차만 생산하는 생성자
 
-> DaumMapComponent_createMap.js와 SearchBar.js 를 참고하세요
+로 정리해 볼 수 있습니다.
 
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/basicMap/">이동하기</a>
+### 기본적으로 빨간색 자동차만 생산하는 생성자
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+### 기본적으로 DIY 자동차만 생산하는 생성자
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+### 기본적으로 아반x 자동차만 생산하는 생성자
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+### 아무것도 정해지지 않은, 기본형 자동차만 생산하는 생성자
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+### 그럼 위를 모두 포함하는 Car 자동차 공장(class)의 경우 다음과 같이 표현이 가능합니다.
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+### 그러면 저희는 main Class에서 다음과 같이 자동차를 만들어 줄 수 있습니다.
+
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
+
+## 메소드란?
+
+이전에 생성자를 자동차의 생산라인이라고 비유했습니다.
 <br/>
-구현 코드 : 
+매소드는 쉽게 말해 그렇게 만들어진 자동차를 출하할 때, 혹은 생성 과정에서 어떤 활동을 할것이냐 라는 '행동'을 정의해 줍니다.
 <br/>
-<a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_createMap.js">createMap으로 이동하기</a>
-<br/>
-<a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/SearchBar.js">SearchBar으로 이동하기</a>
+두 가지의 예를 들자면, 출하 후 소비자에게 만들어진 차의 정보를 보여주는 행동과 일반 자동차를 고객의 요구에 맞게 공장에서 자동차를 다시 제조하는 행동을 생각할 수 있습니다. 
 
-## 현재 지도의 중심좌표를 기준으로 행정동 주소와 위도 경도를 받아오기
+1. 출하 후 소비자에게 만들어진 차의 정보를 보여주는 메소드
+2. 일반 자동차를 고객의 요구에 맞게 공장에서 자동차를 다시 제조하는 메소드
 
-> DaumMapComponent_createMap.js와  DaumMapComponent_coord2Address.js 를 참고하세요
+### 출하 후 소비자에게 만들어진 차의 정보를 보여주는 메소드
 
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/mapInfo/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_coord2Address.js">이동하기</a>
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
 
-## 드래그 이벤트 발생 시, 활용방법 예시
+### 일반 자동차를 고객의 요구에 맞게 공장에서 자동차를 다시 제조하는 메소드
 
-> DaumMapComponent_createMap.js와  DaumMapComponent_mapDragend.js 를 참고하세요
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
 
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/addMapDragendEvent/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_mapDragEnd.js">이동하기</a>
+### 그럼 위를 모두 포함하는 Car 자동차 공장(class)의 경우 다음과 같이 표현이 가능합니다.
 
-## 지도의 크기를 조정하는 방법 예시
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```
 
-> DaumMapComponent_createMap.js와  DaumMapComponent_resize.js 를 참고하세요
+### 그러면 저희는 main Class에서 다음과 같이 메소드를 사용할 수 있습니다.
 
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/mapRelayout/">이동하기</a>
-<br/>음
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_resize.js">이동하기</a>
-
-## 현재 지도를 static이미지로 받아오기
-
-> DaumMapComponent_createMap.js와  DaumMapComponent_staticMap.js 를 참고하세요
-
-다음 지도 docs : <a href="http://apis.map.daum.net/web/sample/staticMapWithMarker/">이동하기</a>
-<br/>
-구현 코드 : <a href="https://github.com/KisungKim/ReactWithDaumMap/blob/master/DaumMapComponent_staticMap.js">이동하기</a>
+```java
+class이름 인스턴스이름 = new class이름();
+예를 들어.. 된장국을
+Cooking duenjang = new Cooking();
+이런식으로 만들어 줄 수 있습니다.
+```

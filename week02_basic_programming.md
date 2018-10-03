@@ -9,7 +9,7 @@ title: "자바 클래스에 대해 이해하기"
 <br/>
 <a href="http://programmer-seva.tistory.com/72">참조 타입과 메모리</a>
 <br/>
-정말 간단하게 말하면 <code>public static void main(String args[]) { } </code>라는 놈이 자바 프로그램의 시작(정확히 말하면 아닙니다)이라고 생각하시면 됩니다.
+정말 간단하게 말하면 <code>public static void main(String args[]) { } </code>라는 놈이 <b>만들어진 프로그램의 시작</b>(엄밀히 말하면 아닙니다)이라고 생각하시면 됩니다.
 <br/>
 그리고 위 메소드는 stack영역에서 실행됩니다.
 <br/>

@@ -54,69 +54,110 @@ class Car {
 <br/>
 그 공장 안에는 여러 생산라인이 있습니다.
 <br/>
-예를 들어 기본적으로 빨간색 자동차만 생산하는 생산라인, 혹은 기본적으로 DIY자동차를 생산하는 생산라인, 혹은 기본적으로 아반x만 생산하는 생산라인, 혹은 그냥 박스형 자동차만 생산하는 생산라인이 있을 수 있습니다.
+예를 들어 기본적으로 색깔이 있는 자동차만 생산하는 생산라인, 혹은 기본적으로 DIY자동차를 생산하는 생산라인, 혹은 기본적으로 특정 업체의 자동차만 생산하는 생산라인, 혹은 그냥 박스형 자동차만 생산하는 생산라인이 있을 수 있습니다.
 <br/>
 이를 생성자의 개념에 대입해보면..
 
-1. 기본적으로 빨간색 자동차만 생산하는 생성자
+1. 기본적으로 색깔이 있는 자동차만 생산하는 생성자
 2. 기본적으로 DIY 자동차만 생산하는 생성자
-3. 기본적으로 아반x 자동차만 생산하는 생성자
+3. 기본적으로 특정 업체의 자동차만 생산하는 생성자
 4. 아무것도 정해지지 않은, 기본형 자동차만 생산하는 생성자
 
 로 정리해 볼 수 있습니다.
 
-### 기본적으로 빨간색 자동차만 생산하는 생성자
+### 기본적으로 색깔이 있는 자동차만 생산하는 생성자
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public Car(String color) {
+		this.color = color; // this는 위 표시된 '클래스의 필드'를 의미합니다. '(String color)'부분의 color과 이름이 다르다면 생략이 가능합니다
+	}
 ```
 
 ### 기본적으로 DIY 자동차만 생산하는 생성자
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public Car(String color, int carId, String carName) {
+		this.color = color;
+		this.carId = carId;
+		this.carName = carName;
+	}
 ```
 
-### 기본적으로 아반x 자동차만 생산하는 생성자
+### 기본적으로 특정 업체의 자동차만 생산하는 생성자
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public Car(int carId) {
+		this.carId = carId;
+	}
 ```
 
 ### 아무것도 정해지지 않은, 기본형 자동차만 생산하는 생성자
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public Car() {}
 ```
 
 ### 그럼 위를 모두 포함하는 Car 자동차 공장(class)의 경우 다음과 같이 표현이 가능합니다.
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+package com.skku.java.tutorin01;
+
+public class Car {
+	// 클래스의 필드
+	String color;
+	int carId;
+	String carName;
+	
+	// 클래스의 생성자
+	public Car() {}
+	
+	public Car(String color) {
+		this.color = color; // this는 위 표시된 '클래스의 필드'를 의미합니다. '(String color)'부분의 color과 이름이 다르다면 생략이 가능합니다
+	}
+	public Car(int carId) {
+		this.carId = carId;
+	}
+
+	public Car(String color, int carId, String carName) {
+		this.color = color;
+		this.carId = carId;
+		this.carName = carName;
+	}
+	
+	// 클래스의 메소드
+	public void showInfo() {
+		System.out.println(color+" "+carId+" "+carName);
+	}
+}
+
 ```
 
 ### 그러면 저희는 main Class에서 다음과 같이 자동차를 만들어 줄 수 있습니다.
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+package com.skku.java.tutorin01;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Car c1 = new Car("red");              // 빨간 색 자동차를
+		Car c2 = new Car(3);                  // 3번 업체의 자동차를
+		Car c3 = new Car("blue", 7, "Pinky"); // 파란색, 7번 업체의, Pinky 자동차를
+		
+		c1.showInfo();
+		c2.showInfo();
+		c3.showInfo();
+	
+	}
+}
+```
+
+```
+실행결과는 아래와 같이 나옵니다
+-----
+red 0 null      <-- c1.showInfo()의 결과
+null 3 null     <-- c2.showInfo()의 결과
+blue 7 Pinky    <-- c3.showInfo()의 결과
 ```
 
 ## 메소드란?
@@ -133,35 +174,90 @@ Cooking duenjang = new Cooking();
 ### 출하 후 소비자에게 만들어진 차의 정보를 보여주는 메소드
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public void showInfo() {
+		System.out.println(color+" "+carId+" "+carName);
+	}
 ```
 
 ### 일반 자동차를 고객의 요구에 맞게 공장에서 자동차를 다시 제조하는 메소드
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+	public void setCar(String color, int carId, String carName) {
+		this.color = color;
+		this.carId = carId;
+		this.carName = carName;
+	}
 ```
 
 ### 그럼 위를 모두 포함하는 Car 자동차 공장(class)의 경우 다음과 같이 표현이 가능합니다.
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+package com.skku.java.tutorin01;
+
+public class Car {
+	// 클래스의 필드
+	String color;
+	int carId;
+	String carName;
+	
+	// 클래스의 생성자
+	public Car() {}
+	
+	public Car(String color) {
+		this.color = color; // this는 위 표시된 '클래스의 필드'를 의미합니다. '(String color)'부분의 color과 이름이 다르다면 생략이 가능합니다
+	}
+	public Car(int carId) {
+		this.carId = carId;
+	}
+
+	public Car(String color, int carId, String carName) {
+		this.color = color;
+		this.carId = carId;
+		this.carName = carName;
+	}
+	
+	// 클래스의 메소드
+	public void showInfo() {
+		System.out.println(color+" "+carId+" "+carName);
+	}
+	public void setCar(String color, int carId, String carName) {
+		this.color = color;
+		this.carId = carId;
+		this.carName = carName;
+	}
+}
+
 ```
 
 ### 그러면 저희는 main Class에서 다음과 같이 메소드를 사용할 수 있습니다.
 
 ```java
-class이름 인스턴스이름 = new class이름();
-예를 들어.. 된장국을
-Cooking duenjang = new Cooking();
-이런식으로 만들어 줄 수 있습니다.
+package com.skku.java.tutorin01;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Car c1 = new Car("red"); 			 // 빨간 색 자동차를
+		Car c2 = new Car(3); 			     // 3번 업체의 자동차를
+		Car c3 = new Car("blue", 7, "Pinky"); // 파란색, 7번 업체의, Pinky 자동차를
+		
+		c1.showInfo();
+		c2.showInfo();
+		c3.showInfo();
+		
+		c1.setCar("green", 2, "new car");	// 첫번째로 만들었던 c1의 정보를 다음과 같이 바꿉니다.
+		c1.showInfo();
+	
+	}
+}
+
+```
+
+```
+실행결과는 아래와 같이 나옵니다
+-----
+red 0 null      <-- c1.showInfo()의 결과
+null 3 null     <-- c2.showInfo()의 결과
+blue 7 Pinky    <-- c3.showInfo()의 결과
+green 2 new car <---c1의 정보를 바꾸고 c1.showInfo()를 한 
 ```

@@ -3,6 +3,8 @@ layout: default
 title: "자바 클래스에 대해 이해하기"
 ---
 
+
+
 > method영역, heap영역, stack영역
 
 다음의 글을 참고하셔도 도움이 됩니다
@@ -24,6 +26,8 @@ method영역에서 Car클래스의 정보를 가져와서 heap영역에 myobj를
 3. 프로그램이 돌면서 생성한 <b>객체들의 정보가</b> == heap영역 ex> instance 'myobj'
 
 각각 구분되어 저장된다고만 이해하시면 됩니다.
+
+
 
 > 자바 클래스의 생성자 이해하기
 

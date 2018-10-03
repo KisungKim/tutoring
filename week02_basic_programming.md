@@ -19,9 +19,9 @@ method영역에서 Car클래스의 정보를 가져와서 heap영역에 myobj를
 <br/>
 그냥 여기서는 
 
-1. 프로그램이 돌아가는 순서, == stack영역 ex> public static void main(String args[])
-2. 프로그램이 돌아가면서 사용하는 클래스의 정보, == method영역 ex> class 'Car'
-3. 프로그램이 돌면서 생성한 객체들의 정보가 == heap영역 ex> instance 'myobj'
+1. 프로그램이 돌아가는 <b>순서</b>, == stack영역 ex> public static void main(String args[])
+2. 프로그램이 돌아가면서 <b>사용하는 클래스의 정보</b>, == method영역 ex> class 'Car'
+3. 프로그램이 돌면서 생성한 <b>객체들의 정보가</b> == heap영역 ex> instance 'myobj'
 
 각각 구분되어 저장된다고만 이해하시면 됩니다.
 

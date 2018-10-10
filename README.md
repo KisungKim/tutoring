@@ -20,13 +20,13 @@
 > ### 1주차
 > 1. SSH 통신을 이용하여 본인 컴퓨터에서 가상 인스턴스(ex 우분투)에 접속하기
 > 2. 첫 자바 프로젝트 만들기 및 터미널에서 많이 사용되는 단축키
-> #### [이동하기](tutoring/week01_basic_programming.md)
+> #### [이동하기](/week01_basic_programming.md)
 
 <br/>
 
 > ### 2주차
 > 1. 자바 클래스 해부하기(클래스, 생성자, 메소드)
-> #### [이동하기](tutoring/week02_basic_programming.md)
+> #### [이동하기](/week02_basic_programming.md)
 
 <br/>
 

@@ -33,6 +33,6 @@
 > ### 3주차
 > 1. 자바 형변환(type casting) 알아보기(primitive type)
 > 2. 자바 형변환(type casting) 알아보기(class)
-> #### [이동하기]
+> #### [이동하기](/week03_basic_programming.md)
 
 <br/>

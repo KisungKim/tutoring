@@ -15,7 +15,15 @@ title: "자바 형변환에 대해 이해하기"
 <br/>
 byte의 단위를 물잔의 크기라고 한다면 작은 물잔에 들어있는 물(4bytes)을 큰 물잔에(8bytes) 옮기는데에는 큰 문제가 없습니다.
 <br/>
-반면 double의 값을 integer에 담을 때에는 *명시적*으로 형을 변환해주어야 합니다.
+반면 double의 값을 integer에 담을 때에는 *명시적* 으로 형을 변환해주어야 합니다.
+<br/>
+또한 예를 들어 3.4의 double값이라면 소수점 아래는 버려지는 모습을 살펴볼 수 있습니다.
+<br/>
+만약 같은 정수 자료형을 담는 long타입에서 integer타입으로의 형변환의 경우, 
+<br/>
+다시말해 long타입 변수가 integer가 표현할 수 있는 20억 이상의 숫자의 범위를 넘는 수일때(ex 50억)
+<br/>
+integer에는 long값이 그대로 들어가느 것이 아닌 trash값(개발자가 의도하지 않은 임의의 값)이 틀어가게 됩니다. 
 <br/>
 형변환은 다음의 예시를 통해 살펴볼 수 있습니다.
 
@@ -33,7 +41,7 @@ public class Main {
 		System.out.println("After casting, double value will be : "+imEightBytes);
 		
 		// Initialize
-		imEightBytes = 8.;
+		imEightBytes = 8.3;
 		// ==========
 
 		// 아래 부분이 명시적으로 형변환이 이루어지는 부분입니다.

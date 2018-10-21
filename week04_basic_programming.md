@@ -24,7 +24,6 @@ title: "자바 클래스의 객체저장"
 <br/>
 
 ```java
-package com.skku.java.tutoring05;
 
 class Animal {
 	public void action() {

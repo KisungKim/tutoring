@@ -13,6 +13,13 @@
 > ### 3주차
 
 <br/>
+
+> ### 4주차
+> 1. 함수가 실행되는 과정에서 Stack자료구조를 엿볼 수 있는 코드
+> #### [이동하기](/week04_data_structure.md)
+
+<br/>
+
 <br/>
 
 ## 프로그래밍 입문
@@ -34,5 +41,11 @@
 > 1. 자바 형변환(type casting) 알아보기(primitive type)
 > 2. 자바 형변환(type casting) 알아보기(class)
 > #### [이동하기](/week03_basic_programming.md)
+
+<br/>
+
+> ### 4주차
+> 1. 자바 클래스의 객체 저장하기
+> #### [이동하기](/week04_basic_programming.md)
 
 <br/>

@@ -77,7 +77,7 @@ public class Main {
 		// 성적은 다음과 같습니다
 		//	중간고사  	             컴퓨터개론         데이터베이스       알고리즘	      네트워크개론	
 		Course[] mid = new Course[] { new Course(23), new Course(40), new Course(50), new Course(17)};
-		//	중간고사  	             컴퓨터개론         데이터베이스       알고리즘	      네트워크개론	
+		//	고사  	             컴퓨터개론         데이터베이스       알고리즘	      네트워크개론	
 		int[] finalScore = new int[] {      45,            78,             99,               50     };
 		
 		// Midterm클래스의 객체인 myMid에 중간고사 성적을 넣었습니다

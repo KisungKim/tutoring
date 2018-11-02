@@ -51,7 +51,7 @@ class Final {
 		// 순서 3. finalScore으로부터 기말 점수를 받아오세요
 		// 순서 4. 받은 기말고사 성적과 중간고사 성적의 평균을 냅니다.
 		// 순서 5. 계산된 평균을 setFinalScore을 통해 각 Course객체에 저장해주세요
-		//		===========================================
+		/       ===========================================
 		
 		System.out.println("------ 기말 합산 결과 ------");
 		printResult(midScore);
@@ -75,9 +75,9 @@ public class Main {
 		// 목표 : Final class의 calcFinalScore을 완성해 아래의 코드가 정상적으로 작동하도록 만들어주세요
 		
 		// 성적은 다음과 같습니다
-		//	중간고사  					컴퓨터개론		   데이터베이스		알고리즘			네트워크개론				
+		//	중간고사  	             컴퓨터개론         데이터베이스       알고리즘	      네트워크개론	
 		Course[] mid = new Course[] { new Course(23), new Course(40), new Course(50), new Course(17)};
-		//	기말고사  					컴퓨터개론		   데이터베이스		알고리즘			네트워크개론				
+		//	중간고사  	             컴퓨터개론         데이터베이스       알고리즘	      네트워크개론	
 		int[] finalScore = new int[] {      45,            78,             99,               50     };
 		
 		// Midterm클래스의 객체인 myMid에 중간고사 성적을 넣었습니다

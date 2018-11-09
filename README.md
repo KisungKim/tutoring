@@ -57,3 +57,9 @@
 > ### 5주차
 > 1. Getter, Setter예제
 > #### [이동하기](/week05_basic_programming.md)
+
+<br/>
+
+> ### 6주차
+> 1. 2차원배열 활용하기(입문)
+> #### [이동하기](/week06_basic_programming.md)

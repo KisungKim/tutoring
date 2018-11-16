@@ -32,6 +32,12 @@
 
 <br/>
 
+> ### 6주차
+> 1. Binary Search Tree의 기본개념, 삽입, 삭제
+> #### [이동하기](/week07_data_structure.md)
+
+<br/>
+
 
 ## 프로그래밍 입문
 

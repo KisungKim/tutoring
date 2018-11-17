@@ -7,8 +7,6 @@ title: "pseudo 코드에서부터 실전 코드까지 구현(Simple Dot Com inst
 > 
 
 ```java
-package com.skku.java.tutoring09;
-
 import java.util.Scanner;
 
 public class Game {

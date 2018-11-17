@@ -75,4 +75,67 @@ def insertBST(bst, x):
 ## Binary Search Tree 삭제
 
 ```python
+class Node:
+    def __init__(self):
+        self.key = None
+        self.left = None
+        self.right = None
+
+
+def searchBST(x):
+    # do search
+    #
+    #
+    # end
+
+    # Example return values ... => searching 작업 이후의 값은 아래와 같습니다.
+    direction = "left" # Search 이후 x를 key로 가지는 node가 parent node 에 연결된 방향
+    parent = Node()    # x를 key로 가지는 node의 parent node
+    target = Node()    # x를 key로 가지는 node
+    return direction, parent, target
+
+
+def delete(x):
+    direction, parent, target = searchBST(x)
+
+    # do target의 자식이 몇 명인지 확인
+    #
+    #
+    # end
+
+    number_of_child = 1  # 0, 1, 2 중 하나의 값
+    if number_of_child==0:
+        if direction == "left":
+            parent.left = None
+        else:
+            parent.right = None
+        return
+    if number_of_child==1:
+        if direction == "left":
+            # do something
+            #
+            # end
+            return
+        else:
+            # do something
+            #
+            # end
+            return
+    if number_of_child==2:
+        biggest_node = None
+
+        # do
+        # 현재 target 노드를 기준으로 현재 노드의 key보다 작은 노드들 중 가장 큰 값
+        # 혹은 현재 노드의 key보다 큰 노드들 중 가장 작은 값 search
+        # end
+
+        delete(biggest_node)    # recursive function call 을 통해 해당 노드를 제거
+
+        # do something
+        # delete 작업이 끝난 이후, biggest값과 target node를 switch 하는 작업
+        #
+        # end
+
+        return
+
 ```

@@ -1,10 +1,8 @@
 ---
 layout: default
-title: "자바 기본내용"
+title: "자바 기본내용(try-catch)"
 ---
-
-> ## pseudo 코드에서부터 실전 코드까지 구현(Simple Dot Com instance와 유사)
-> 
+ 
 ## Try-Catch
 
 > ## 1. throws를 통해 오류를 관리하는 경우

@@ -1,62 +1,135 @@
 ---
 layout: default
-title: "자바 기본내용(try-catch)"
+title: "자바기본개념(toString, equals, 다형성, 상속에서의 접근제한자)"
 ---
  
-## Try-Catch
+> ### toString()메소드에서 super()의 의미와 toString()메소드를 사용하는 이유는 무엇입니까?
+>
+> toString의 경우 String이라는 자바 라이브러리 클래스 내에 이미 정의되어있는 메소드입니다. 
+>
+> 원래 toString()은 해당 객체에 대한 정보를 String type으로 리턴하는 역할을 합니다. 
+>
+> 기본적으로 출력되는 값은 해당 객체의 정보를 리턴한 값이기 때문에 예를 들어 edu.skky.ccc.Cal@70dea4e는 
+>
+> edu.skky.ccc.Cal이라는 패키지의 70dea4e라는 가상이름을 가진 객체라는 의미입니다. 
+>
+> 그런데 각 클래스마다 해당 객체에 대한 정보를 다르게 보여주고 싶은 경우가 있습니다. 
+>
+> 예를 들어 Student라는 클래스를 만들었을 때, 그 가상이름보다는 Student 클래스 내부의 stuId나, stuName등을 
+>
+> 보여주고 싶은 경우인데, 그때는 재정의인 override를 통해 본래 toString이 아닌, stuId등을 출력하는 메소드로 
+>
+> 사용자가 바꿔주는 겁니다. 그래서 super.toString의 경우 사용자가 바꾸기 전 원래 toString의 출력값을 
+>
+> 보여주고(패키지명+가상이름) 그 이후의 값은 사용자가 출력하기를 원하는 값으로 바꾸는 모습을 보여주는 겁니다
 
-> ## 1. throws를 통해 오류를 관리하는 경우
+> ### clone에 대해 잘 이해가 가지 않습니다. clone을 사용하기 위해서는 반드시 try-catch구문을 사용해야 하는건가요?
 >
-> 먼저 기본 Exception 클래스를 상속받아 사용자가 재정의하는 새로운 Exception class를 만들 수 있습니다. 
+> clone의 경우는 저도 사용해보지를 않았습니다만, 아마 자바 내부에서 객체를 복제하는데 오류가 발생하는 경우가 있는 것 같습니다. 
 >
-> 아래의 DataNotFoundException, DuplicatedException이 그 예시입니다. 
+> 흔히 file을 open하는 코드에서 IOException을 예외로 걸어주는 것처럼 clone시에도 항상 예외오류가 
 >
-> 이와 같이 Exception class를 지정해 주는 이유는 프로그램 구동 도중 발생할 수 있는 오류들에 대한 사후처리를 
+> 발생할 가능성이 있어 무조건 try-catch를 적어주셔야 하는것 같습니다.
+
+> ### equals의 경우에는 항상 boolean을 리턴하도록 지정을 해주어야 하나요?
+> equals도 toString의 예시와 마찬가지로 Object 클래스에서 이미 정의된 equals와 String 클래스에서 
 >
-> 개발자가 원하는 방향으로 해줄 수 있다는 장점을 지닙니다.
+> 이미 정의된 equals가 있습니다. 전자의 경우 해당 객체의 가상 주소값(쉽게 말해 같은 객체인지 아닌지를 비교)를 비교하는거고 
+>
+> 후자의 경우 문자열이 같은지를 비교하는 겁니다. String의 경우 equals가 아닌 그낭 ==를 사용했을 때에는 
+>
+> Object클래스의 equals가 사용되어 객체의 주소값을 비교하므로 같은 문자열이라도 객체가 다르다면 false를 리턴하게 됩니다. 
+>
+> Object클래스의 equals를 오버라이드한경우에만 boolean을 리턴하도록 지정을 해주어야 하며 그 이외의 경우에는 
+>
+> 상황에 따라 적어주시면 됩니다.
+
+> ### 상속의 경우 접근제한자에 대해 설명해 주세요.
+> 상속을 할 때에는 부모가 선언한 접근제한자보다 같거나 더 넓은 범위를 허용해 주어야 합니다. 
+>
+> 예를 들어, 부모의 클래스에서 public으로 어떤 추상메소드를 선언한 경우 private-default-protected-public에 따라 
+>
+> 자식 클래스에서 해당 메소드를 재정의할 때에 public이외의 접근제한자는 사용할 수 없습니다
+
+> ### 다형성에 대해서 잘 이해가 가지 않습니다.
+> 보통 new로 객체가 생성될 때, 원래는 super()이라는 키워드가 생성자에 명시되어 있지 않아도 항상 super을 호출합니다. 
+>
+> 이 말은 예를 들어서 Car이라는 클래스가 있다고 가정하면 최상위 클래스인 Object클래스부터 Car사이에 해당하는 
+>
+> 모든 클래스를 다 호출하고 맨 마지막에 Car class의 생성자를 호출한다는 의미가 됩니다. 
+>
+> 이때 Object a = new Car(); 처럼 선언할 수도 있는데 위처럼 선언하는 이유로는 공통된 부모를 상속받는 클래스로 
+>
+> 객체를 선언했을때, 같은 자료구조에 묶일 수 있고(ex Object[]), 그걸 꺼내는 상황에서 실제로 필요한 상황에 
+>
+> 특정 객체인지 확인하고 각 객체의 특징에 따라 메소드를 호출하고 활용하기 위함입니다. 
+>
+> 자세한 내용은 아래 코드를 참고하시면 됩니다. 
 
 ```java
-// DuplicatedException.java
-public class DuplicatedException extends Exception{
-	public DuplicatedException() {};
-	public DuplicatedException(String id) {
-		super("등록을 원하시는 "+id+"에 대해서 중복된 데이터가 존재합니다");
+class Car {
+	public Car() {
+	}
+
+	void basic() {
 	}
 }
 
-// Main.java
-// 중략...
-} catch (DuplicatedException e) {
-	System.out.println("오류코드2: " + e.getMessage());
-	continue;
-// 중략...
+class Avante extends Car {
+	int num;
+	public Avante(int input) {
+		num = input;
+		System.out.println("init B ended "+num);
+	}
+	void option() {
+		System.out.println("Avante "+num);
+	}
+}
+
+class BMW extends Car {
+	int num;
+	public BMW(int input) {
+		num = input;
+		System.out.println("init B ended "+num);
+	}
+	void option() {
+		System.out.println("BMW "+num);
+	}
+}
+
+public class IFaceTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Car a1 = new BMW(3);
+		Car a2 = new Avante(4);
+		
+		Car[] aCar = {a1, a2};
+		for(int i=0;i<aCar.length;i++) {
+			if (aCar[i] instanceof BMW) {
+				((BMW)aCar[i]).option();				
+			} else if (aCar[i] instanceof Avante) {
+				((Avante)aCar[i]).option();				
+			}
+		}
+		
+		Object a = new String("car");
+		System.out.println(a.toString());
+		Object b = new Object();
+		System.out.println(b.toString());
+		
+	}
+
+}
 ```
 
-> ## 2. 예상할 수 있는 외부 오류가 발생하여도 프로그램이 계속해서 실행할 수 있도록 하는 경우
-> 기본적으로 예외처리를 해주지 않은 프로그램에서는 오류 발생 시, 프로그램이 죽게됩니다. 
->
-> 하지만 예외가 발생하는 상황은 매우 많으며 그 문제는 http통신이나 파일오픈 등 
->
-> 개발자가 직접 관리하기 힘든 영역에서 발생할 수 있습니다. 
->
-> 예를 들어, 서버에서 데이터를 받아와 데이터베이스에 저장하는 프로그램이 있다고 가정한다면 
->
-> (1)서버 오류가 발생하는 경우 
->
-> (2) 데이터를 데이터베이스에 저장하기 위한 처리작업에서 오류가 발생한 경우 
->
-> (3) 데이터베이스에 저장하는 과정에서 데이터베이스 서버 등 문제가 발생할 경우
->
-> 라는 세 부분에서 문제가 발생할 수 있습니다. 이때 적절한 예외처리를 해주지 못한 경우 
->
-> 프로그램은 각 상황에서 죽게되지만 예외처리를 해주는 경우 오류에 대해 대처가 가능하다는 이점을 얻게됩니다. 
->
-> 예를 들어 외부 서버에 접속해서 1~100개의 정보를 받는 상황을 가정하고 55번 정보까지 받은 상황에서 
->
-> 오류가 발생하는 상황을 가정합니다.이때 오류 로그를 파일로 기록하고
->
-> (ex 내용은 지금까지 받은 최종 정보는 55번 등의 내용이 작성될 수 있습니다) 
->
-> 서버의 정상화가 확인되면 다시 서버에 접속해 해당 오류 로그를 통해 1번 정보부터 다시 받아오지 않고 
->
-> 56번 정보부터 받아오는  프로그램을 만들 수 있습니다. 
+```
+출력결과
+==========
+init B ended 3
+init B ended 4
+BMW 3
+Avante 4
+car
+java.lang.Object@4e25154f
+```

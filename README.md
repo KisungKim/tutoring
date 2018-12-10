@@ -98,3 +98,8 @@
 > 1. 자바기본개념(try-catch)
 > #### [이동하기](/week09_basic_programming.md)
 
+<br/>
+
+> ### 10주차
+> 1. 자바기본개념(toString, equals, 다형성, 상속에서의 접근제한자)
+> #### [이동하기](/week10_basic_programming.md)
